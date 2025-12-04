@@ -1,0 +1,12 @@
+{
+  "name": "playwright-webshop-e2e-tests",
+  "version": "1.0.0",
+  "description": "E2E UI Tests using Playwright + TypeScript for a demo webshop",
+  "scripts": {
+    "test": "npx playwright test",
+    "report": "npx playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.45.0"
+  }
+}
