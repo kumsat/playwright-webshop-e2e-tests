@@ -7,6 +7,7 @@ export class LoginPage extends BasePage {
   }
 
   async goto() {
+    // baseURL is set in playwright.config.ts → '/'
     await this.page.goto('/');
   }
 
