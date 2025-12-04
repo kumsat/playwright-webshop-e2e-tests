@@ -4,18 +4,22 @@ import { InventoryPage } from '../page-objects/InventoryPage';
 import { CartPage } from '../page-objects/CartPage';
 
 test('user can add item to cart and proceed to checkout', async ({ page }) => {
-  const login = new LoginPage(page);
-  const inventory = new InventoryPage(page);
-  const cart = new CartPage(page);
+  const loginPage = new LoginPage(page);
+  const inventoryPage = new InventoryPage(page);
+  const cartPage = new CartPage(page);
 
-  await login.goto();
-  await login.login('standard_user', 'secret_sauce');
+  await loginPage.goto();
+  await loginPage.login('standard_user', 'secret_sauce');
 
-  await inventory.addToCart();
-  await inventory.openCart();
+  await expect(page).toHaveURL(/inventory/);
 
-  await cart.checkout();
+  await inventoryPage.addFirstItemToCart();
+  await inventoryPage.openCart();
 
-  await expect(page).toHaveURL(/checkout-step-one/);
+  await expect(page).toHaveURL(/cart/);
+
+  await cartPage.proceedToCheckout();
+  await cartPage.fillCheckoutInformation('Satendra', 'Kumar', '85051');
+  await cartPage.finishCheckout();
+  await cartPage.expectThankYouMessage();
 });
-

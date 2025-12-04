@@ -1,3 +1,4 @@
+// page-objects/loginPage.ts
 import { Page } from '@playwright/test';
 import { BasePage } from './BasePage';
 
@@ -17,4 +18,3 @@ export class LoginPage extends BasePage {
     await this.page.click('#login-button');
   }
 }
-

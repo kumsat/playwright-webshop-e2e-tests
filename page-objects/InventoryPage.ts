@@ -1,17 +1,25 @@
+import { Page, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
-import { Page } from '@playwright/test';
 
 export class InventoryPage extends BasePage {
   constructor(page: Page) {
     super(page);
   }
 
-  async addToCart(itemIndex = 0) {
-    await this.page.click('.inventory_item button', { strict: false });
+  // Add the first visible item to the cart
+  async addFirstItemToCart() {
+    const firstAddToCartButton = this.page.locator('.inventory_item button').first();
+    await firstAddToCartButton.click();
   }
 
+  // Open the cart
   async openCart() {
     await this.page.click('.shopping_cart_link');
   }
-}
 
+  // (Optional) verify that at least one product is shown
+  async expectProductsVisible() {
+    const items = this.page.locator('.inventory_item');
+    await expect(items).toHaveCountGreaterThan(0);
+  }
+}
