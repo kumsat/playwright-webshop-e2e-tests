@@ -1,4 +1,3 @@
-// page-objects/loginPage.ts
 import { Page } from '@playwright/test';
 import { BasePage } from './BasePage';
 
@@ -17,4 +16,10 @@ export class LoginPage extends BasePage {
     await this.page.fill('#password', password);
     await this.page.click('#login-button');
   }
+
+  // Locator for error message on failed login
+  errorMessage() {
+    return this.page.locator('[data-test="error"]');
+  }
 }
+
